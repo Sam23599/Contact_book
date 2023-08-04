@@ -1,0 +1,71 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= locals.title %>
+    </title>
+    <script src="https://kit.fontawesome.com/1d176c0d0a.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+    <h1 id="page-heading">
+        <i class="fa-solid fa-address-book"></i>
+        My Contact List
+    </h1>
+    <div id="book">
+        <div id="address-book">
+            <ul style="padding: 0;">
+                <% for( let i of contact_list ) { %>
+                    <li>
+                        <div id="contact-book">
+                            <p id="named">
+                                <i class="fa-regular fa-address-card"
+                                    style="font-size: 1.6rem; color: grey; margin-left: 1rem;"></i>
+                                <%= i.name %>
+                            </p>
+                            <p id="phoned">
+                                <%= i.phone %>
+                            </p>
+                        </div>
+                        <div class="delete-button">
+                            <a href="/delete-number/<%= i.phone %>&<%= i.name %>">
+                                <i class="fa-solid fa-eraser" style="color: steelblue;"></i>
+                            </a>
+                        </div>
+                    </li>
+                    <% } %>
+            </ul>
+        </div>
+        <form action="/create-contact" method="POST">
+            <div>
+                <input type="text" name="name" placeholder="Enter Name" required id="">
+                <input type="number" name="phone" placeholder="Enter Phone" required id="">
+            </div>
+            <div>
+                <button type="submit">
+                    <i class="fa-solid fa-user-plus"></i>
+                    Add Contact
+                </button>
+            </div>
+        </form>
+        <!-- <form action="/delete-contact" method="POST">
+            <div>
+                <button type="submit">
+                    <i class="fa-solid fa-user-minus"></i>
+                    Delete Last Contact
+                </button>
+            </div>
+
+        </form> -->
+    </div>
+
+
+    <script type="text/javascript" src="/js.home.js"></script>
+</body>
+
+</html>
