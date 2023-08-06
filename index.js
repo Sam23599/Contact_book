@@ -3,6 +3,9 @@ const path = require('path');
 const port = 8000;
 
 const db = require('./config/mongoose');
+
+const Contact = require('./modals/contact')
+
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -56,15 +59,32 @@ app.get('/practice', function(req, res){
     });
 })
 
-app.post('/create-contact', function(req, res){
-    // contactList.push({
-    //     name: req.body.name,
-    //     phone: req.body.phone
-    // })
-    // return res.redirect('/');
+// used for non-db functioning-
 
-    contactList.push(req.body);
-    return res.redirect('back');
+// app.post('/create-contact', function(req, res){
+//     // contactList.push({
+//     //     name: req.body.name,
+//     //     phone: req.body.phone
+//     // })
+//     // return res.redirect('/');
+
+//     // contactList.push(req.body);
+// })
+
+// used to function with db now
+app.post('/create-contact', async function createContact(req, res){
+    try {
+        const newContact = await Contact.create({
+            name: req.body.name,
+            phone: req.body.phone
+        });
+        console.log('***', newContact);
+        return res.redirect('back');
+    } catch(err) {
+        console.log('error in creating a contact:', err);
+        return res.redirect('back');
+        
+    }
 })
 
 app.get('/delete-number/:phone&:name', function(req, res){
