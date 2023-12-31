@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 // connect to db
-mongoose.connect('mongodb://127.0.0.1:27017/contact_list_db');
+mongoose.connect('mongodb+srv://satyamvirat:VhjdgBRmNepIAQsX@cluster0.vkjd2g0.mongodb.net/?retryWrites=true&w=majority');
 
 // accquire the connection for operations
 const db = mongoose.connection;
